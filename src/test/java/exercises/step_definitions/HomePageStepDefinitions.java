@@ -133,5 +133,30 @@ public class HomePageStepDefinitions extends HomePageSteps {
     public void verify_that_account_deleted_is_visible() {
         verifyingIfAccountIsDeleted();
     }
-}
 
+    @When("Enter incorrect email address and password")
+    public void enter_incorrect_email_address_and_password() {
+        enterIncorrectEmailAndPassword();
+    }
+
+    @Then("Verify error that {string} is visible")
+    public void verify_error_that_is_visible(String errorMessage) {
+        verifyErrorThatIsVisible(errorMessage);
+    }
+
+    @When("Click Logout button")
+    public void click_logout_button() {
+        clickLogoutButton();
+    }
+
+    @Then("Verify that user is navigated to login page")
+    public void verify_that_user_is_navigated_to_login_page() {
+        verifyThatNavigatedToLoginPage();
+    }
+
+    @When("Enter name and already registered email address")
+    public void enter_name_and_already_registered_email_address() {
+        enterNameOnRegistrationPage()
+                .enterexistingEmailOnRegistrationPage();
+    }
+}

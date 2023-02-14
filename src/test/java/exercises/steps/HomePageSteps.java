@@ -7,9 +7,7 @@ import exercises.utils.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,7 +16,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class HomePageSteps extends HomePage {
 
     public void virfyTheHomePageLoadedSuccessfully() {
-        Assert.assertEquals(Driver.get().getTitle(),"Automation Exercise");
+        Assert.assertEquals("Automation Exercise",Driver.get().getTitle());
+        //Assert.assertEquals("https://automationexercise.com/", Driver.get().getCurrentUrl());
+        //Assert.assertTrue(Driver.get().getCurrentUrl().contains("https://automationexercise"));
     }
 
     public void clickLoginSignUpButton() {
@@ -185,7 +185,6 @@ public class HomePageSteps extends HomePage {
 
     public void loginToYourAccountTextIsVisible() {
         Assert.assertTrue(loginToYourAccountText.isDisplayed());
-        Assert.assertTrue(loginToYourAccountText.isDisplayed());
     }
 
     public void login(String email, String password) {
@@ -199,5 +198,33 @@ public class HomePageSteps extends HomePage {
 
     public void clickContinueButtonAfterAccountIsDeleted() {
         continueButtonAfterAccountIsDeleted.click();
+    }
+
+    public void enterIncorrectEmailAndPassword() {
+        emailArea.sendKeys(ConfigurationReader.get("incorrectEmail"));
+        passwordArea.sendKeys(ConfigurationReader.get("password"));
+    }
+
+    private String getTextOfWebElement(WebElement webElement) {
+        String textOfWebElements=webElement.getText();
+        return textOfWebElements;
+    }
+
+    public void verifyErrorThatIsVisible(String errorMessage) {
+        WebElement ele = Driver.get().findElement(By.xpath("//*[text()='"+errorMessage+"']"));
+        Assert.assertEquals(errorMessage,getTextOfWebElement(ele));
+    }
+
+    public void clickLogoutButton() {
+        logoutButton.click();
+    }
+
+    public void verifyThatNavigatedToLoginPage() {
+        Assert.assertEquals(Driver.get().getTitle(),"Automation Exercise - Signup / Login");
+    }
+
+    public HomePageSteps enterexistingEmailOnRegistrationPage() {
+        emailBoxForRegistering.sendKeys("johndoe1000@gmail.com");
+        return this;
     }
 }

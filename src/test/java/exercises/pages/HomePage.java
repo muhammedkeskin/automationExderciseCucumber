@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
 
-    public HomePage(){
+    public HomePage() {
         PageFactory.initElements(Driver.get(), this);
     }
 
@@ -18,7 +18,7 @@ public class HomePage {
     @FindBy(xpath = "//div[@class='signup-form']/h2")
     public WebElement signupText;
 
-    @FindBy(name= "name")
+    @FindBy(name = "name")
     public WebElement nameBox;
 
     @FindBy(css = "[data-qa='signup-email']")
@@ -36,50 +36,50 @@ public class HomePage {
     @FindBy(xpath = "//input[@type='password']")
     public WebElement chooseAPasswordArea;
 
-    @FindBy(id="days")
+    @FindBy(id = "days")
     public WebElement dayDropdown;
 
-    @FindBy(id="months")
+    @FindBy(id = "months")
     public WebElement monthDropdown;
 
-    @FindBy(id="years")
+    @FindBy(id = "years")
     public WebElement yearDropdown;
 
     @FindBy(xpath = "//*[@id='newsletter']")
     public WebElement newsletterSignupBox;
 
-    @FindBy(id="optin")
+    @FindBy(id = "optin")
     public WebElement specialOfferBox;
 
 
-    @FindBy(id="first_name")
+    @FindBy(id = "first_name")
     public WebElement firstNameBox;
 
-    @FindBy(id="last_name")
+    @FindBy(id = "last_name")
     public WebElement lastNameBox;
 
-    @FindBy(id= "company")
+    @FindBy(id = "company")
     public WebElement companyBox;
 
-    @FindBy(id="address1")
+    @FindBy(id = "address1")
     public WebElement addressBox1;
 
-    @FindBy(id="address2")
+    @FindBy(id = "address2")
     public WebElement addressBox2;
 
-    @FindBy(id="country")
+    @FindBy(id = "country")
     public WebElement countryDropdown;
 
-    @FindBy(id="state")
+    @FindBy(id = "state")
     public WebElement stateBox;
 
-    @FindBy(id="city")
+    @FindBy(id = "city")
     public WebElement cityBox;
 
-    @FindBy(id="zipcode")
+    @FindBy(id = "zipcode")
     public WebElement zipcodeBox;
 
-    @FindBy(id="mobile_number")
+    @FindBy(id = "mobile_number")
     public WebElement mobileNumberBox;
 
     @FindBy(css = "[data-qa='create-account']")
@@ -115,5 +115,10 @@ public class HomePage {
     @FindBy(css = "[data-qa='continue-button']")
     public WebElement continueButtonAfterAccountIsDeleted;
 
+    @FindBy(xpath = "//p[text()='Your email or password is incorrect!']")
+    public WebElement IncorrectEmailOrPasswordErrorMessage;
 
+    @FindBy(xpath = "//a[@href='/logout']")
+    public WebElement logoutButton;
 }
+
