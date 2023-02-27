@@ -61,16 +61,31 @@ Feature: LoginPage
       | password | asdasd                |
     When Click login button
     Then Verify that Logged in as username is visible
-    #When Click Logout button
-    #Then Verify that user is navigated to login page
+    When Click Logout button
+    Then Verify that user is navigated to login page
 
-    #. point of scenario: genel bir method oluşturma ve farklı yerlerde kullanılabilecek şekilde dizayn etme
+    # point of scenario: genel bir method oluşturma ve farklı yerlerde kullanılabilecek şekilde dizayn etme
   Scenario: Register User with existing email
     Given Launch browser
-    Given Navigate to Home Page
+    When Navigate to Home Page
     Then Verify that home page is visible successfully
     When Click on Signup-Login button
     Then Verify New User Signup! is visible
-    #When Enter name and already registered email address
+    When Enter name and already registered email address
     When Click Signup button
     Then Verify error that "Email Address already exist!" is visible
+
+    #1. point of scenario: updoading file
+    #2. point of scenario: alert class
+    Scenario:
+      Given Launch browser
+      When Navigate to Home Page
+      Then Verify that home page is visible successfully
+      When Click on Contact Us button
+      Then Verify GET IN TOUCH is visible
+      When Enter name, email, subject and message
+      When Upload file
+      When Click Submit button
+      When Click OK button
+      When Verify success message Success! Your details have been submitted successfully is visible
+      When Click Home button and verify that landed to home page successfully

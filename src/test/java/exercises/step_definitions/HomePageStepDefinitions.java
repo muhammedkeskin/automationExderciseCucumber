@@ -136,7 +136,8 @@ public class HomePageStepDefinitions extends HomePageSteps {
 
     @When("Enter incorrect email address and password")
     public void enter_incorrect_email_address_and_password() {
-        enterIncorrectEmailAndPassword();
+        enterIncorrectEmail()
+                .enterPassword();
     }
 
     @Then("Verify error that {string} is visible")
@@ -159,4 +160,10 @@ public class HomePageStepDefinitions extends HomePageSteps {
         enterNameOnRegistrationPage()
                 .enterexistingEmailOnRegistrationPage();
     }
+
+    @When("Click on Contact Us button")
+    public void click_on_contact_us_button() {
+        clickContactUsButton();
+    }
+
 }

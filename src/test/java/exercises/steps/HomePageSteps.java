@@ -200,9 +200,14 @@ public class HomePageSteps extends HomePage {
         continueButtonAfterAccountIsDeleted.click();
     }
 
-    public void enterIncorrectEmailAndPassword() {
+    public HomePageSteps enterIncorrectEmail() {
         emailArea.sendKeys(ConfigurationReader.get("incorrectEmail"));
+        return this;
+    }
+
+    public HomePageSteps enterPassword() {
         passwordArea.sendKeys(ConfigurationReader.get("password"));
+        return this;
     }
 
     private String getTextOfWebElement(WebElement webElement) {
@@ -224,7 +229,13 @@ public class HomePageSteps extends HomePage {
     }
 
     public HomePageSteps enterexistingEmailOnRegistrationPage() {
-        emailBoxForRegistering.sendKeys("johndoe1000@gmail.com");
+        String email=ConfigurationReader.get("email");
+        emailBoxForRegistering.sendKeys(email);
         return this;
     }
+
+    public void clickContactUsButton() {
+        contactUsButton.click();
+    }
+
 }

@@ -1,7 +1,6 @@
 package exercises.pages;
 
 import exercises.utils.Driver;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -120,5 +119,9 @@ public class HomePage {
 
     @FindBy(xpath = "//a[@href='/logout']")
     public WebElement logoutButton;
+
+    @FindBy(partialLinkText = "Contact")
+    public WebElement contactUsButton;
+
 }
 
