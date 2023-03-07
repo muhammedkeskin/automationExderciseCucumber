@@ -5,10 +5,7 @@ import exercises.pages.ProductsPage;
 import exercises.utils.ConfigurationReader;
 import exercises.utils.Driver;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +13,7 @@ import java.util.List;
 public class ProductsPageSteps extends ProductsPage {
 
     List<WebElement> productsList;
-    List<WebElement> productsAfterSearch;
+
 
     public void verifyThatNavigatedToProductsPage() {
         HomePage homePage=new HomePage();
@@ -100,8 +97,8 @@ public class ProductsPageSteps extends ProductsPage {
         Assert.assertTrue(Brand.isDisplayed());
     }
 
-    public ProductsPageSteps enterProductNameOnProductPage() {
-        searchProductInput.sendKeys("Blue Top");
+    public ProductsPageSteps enterProductNameOnProductPage(String pName) {
+        searchProductInput.sendKeys(pName);
         return this;
     }
 
@@ -115,8 +112,10 @@ public class ProductsPageSteps extends ProductsPage {
     }
 
     public void verifyAllProductsAreRelatedToSearch(String searchedWord) {
-        productsAfterSearch=Driver.get().findElements(By.xpath("//div[@class='col-sm-4']//p"));
+        List<WebElement> productsAfterSearch=Driver.get().findElements(By.xpath("//div[@class='col-sm-4']//p"));
+
         List<String> textOfProducts=new ArrayList<String>();
+
         for (WebElement element:productsAfterSearch) {
             textOfProducts.add(element.getText());
             Assert.assertTrue(textOfProducts.contains(searchedWord));
@@ -135,9 +134,9 @@ public class ProductsPageSteps extends ProductsPage {
     */
 
     /*scroll down with specific size
-    JavascriptExecutor j = (JavascriptExecutor)driver;
-    j.executeScript("window.scrollBy(0,500)");
-    j.executeScript("window.scrollBy(0,-500)");
+    JavascriptExecutor je = (JavascriptExecutor)driver;
+    je.executeScript("window.scrollBy(0,500)");
+    je.executeScript("window.scrollBy(0,-500)");
     */
 
     public void veifyTextSubscription() {

@@ -21,13 +21,13 @@ Feature: LoginPage
       | brand        |
 
     #point of scenario: birden çok webelementin sayfada olduğunu veirfy yapma
-  Scenario: cenario: Search Product
+  Scenario: Search Product
     Given Launch browser
     Given Navigate to Home Page
     Then Verify that home page is visible successfully
     When Click on Products button
     Then Verify user is navigated to ALL PRODUCTS page successfully
-    When Enter product name in search input and click search button
+    When Enter product name "Blue Top" in search input and click search button
     Then Verify SEARCHED PRODUCTS is visible
     Then Verify all the products related to searched word "Blue Top" are visible
 

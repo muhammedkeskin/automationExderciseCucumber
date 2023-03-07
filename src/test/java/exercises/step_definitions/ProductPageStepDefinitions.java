@@ -32,9 +32,9 @@ public class ProductPageStepDefinitions extends ProductsPageSteps {
         verifyDetailsOnProductPage(details);
     }
 
-    @When("Enter product name in search input and click search button")
-    public void enter_product_name_in_search_input_and_click_search_button() {
-        enterProductNameOnProductPage()
+    @When("Enter product name {string} in search input and click search button")
+    public void enter_product_name_in_search_input_and_click_search_button(String productName) {
+        enterProductNameOnProductPage(productName)
                 .clickSearchButtonOnProductPage();
     }
 
