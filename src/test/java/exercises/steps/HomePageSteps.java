@@ -155,7 +155,7 @@ public class HomePageSteps extends HomePage {
         continueButton.click();
     }
 
-    private void dismissPopupAfterClickingContinueButton() {
+    public void dismissPopupAfterClickingContinueButton() {
         Driver.get().switchTo().frame("aswift_3");
         WebDriverWait wait = new WebDriverWait(Driver.get(),10);
         wait.until(ExpectedConditions.elementToBeClickable(dismissPopupButton));
@@ -238,4 +238,7 @@ public class HomePageSteps extends HomePage {
         contactUsButton.click();
     }
 
+    public void clickOnProductsButton() {
+        productsButton.click();
+    }
 }

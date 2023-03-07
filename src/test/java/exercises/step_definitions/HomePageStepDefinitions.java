@@ -4,6 +4,7 @@ import exercises.steps.HomePageSteps;
 import exercises.utils.ConfigurationReader;
 import exercises.utils.Driver;
 import io.cucumber.java.en.*;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.Map;
 
@@ -164,6 +165,11 @@ public class HomePageStepDefinitions extends HomePageSteps {
     @When("Click on Contact Us button")
     public void click_on_contact_us_button() {
         clickContactUsButton();
+    }
+
+    @When("Click on Products button")
+    public void click_on_products_button() {
+        clickOnProductsButton();
     }
 
 }

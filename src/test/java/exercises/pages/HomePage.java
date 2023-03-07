@@ -123,5 +123,7 @@ public class HomePage {
     @FindBy(partialLinkText = "Contact")
     public WebElement contactUsButton;
 
+    @FindBy(xpath = "//i[@class='material-icons card_travel']/..")
+    public WebElement productsButton;
 }
 
