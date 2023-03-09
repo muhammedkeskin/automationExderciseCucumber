@@ -238,7 +238,14 @@ public class HomePageSteps extends HomePage {
         contactUsButton.click();
     }
 
-    public void clickOnProductsButton() {
+    public void clickOnProductsButton() throws InterruptedException {
         productsButton.click();
+
+        Thread.sleep(10000);
+        try {
+            dismissButtonOnPopop.click();
+        } catch (Exception e) {
+
+        }
     }
 }

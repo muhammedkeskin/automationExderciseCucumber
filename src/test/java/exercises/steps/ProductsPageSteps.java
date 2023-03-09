@@ -6,13 +6,19 @@ import exercises.utils.ConfigurationReader;
 import exercises.utils.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ProductsPageSteps extends ProductsPage {
 
     List<WebElement> productsList;
+    int count=0;
+
+    public int lastClickedBrandIndex = -1;
+    public Random rd = new Random();
 
 
     public void verifyThatNavigatedToProductsPage() {
@@ -150,6 +156,92 @@ public class ProductsPageSteps extends ProductsPage {
 
     public void verifySuccessMessageIsAvailableAboutSubscription() {
         Assert.assertTrue(susbscribeSuccessMessage.isDisplayed());
+    }
+
+    public void clickContinueShoppingButtonOnProductPage() {
+        continueShoppingButtonOnProductPage.click();
+    }
+
+
+    //how to create action object?
+    //passing driver as a constructor
+    public ProductsPageSteps hoverOverFirstProductOnProductPage() {
+        Actions actions = new Actions(Driver.get());
+        actions.moveToElement(firstProduct).perform();
+        return this;
+    }
+
+    public ProductsPageSteps clickOnAddToCartButtonOnProductPage() {
+        count++;
+        addToCartButton.click();
+        return this;
+    }
+
+    public ProductsPageSteps hoverOverSecondProductOnProductPage() {
+        Actions actions = new Actions(Driver.get());
+        actions.moveToElement(secondProduct).perform();
+        return this;
+    }
+
+    public void clickOnCartButtonOnProductPage() {
+        viewCartButtonProduct.click();
+    }
+
+    public void verifySizeOfProductsInCart() {
+        Assert.assertEquals(count, productsInCart.size());
+    }
+
+    public void verifyProductsCrittersInCart() {
+
+        //verifying by int value:
+        int firstPriceInt = Integer.parseInt(firstPrice.getText().replaceAll("Rs. ", ""));
+        int secondPriceInt = Integer.parseInt(secondPrice.getText().replaceAll("Rs. ", ""));
+
+        //verifying by String value:
+        String firstTotalPrice = firstTotolPrice.getText().replaceAll("Rs. ", "");
+        String secondTotalPrice = secondTotolPrice.getText().replaceAll("Rs. ", "");
+
+        Assert.assertEquals(500, firstPriceInt);
+        Assert.assertEquals(400, secondPriceInt);
+        Assert.assertEquals("1", firstQuantity.getText());
+        Assert.assertEquals("1", secondQuantity.getText());
+        Assert.assertEquals("500", firstTotalPrice);
+        Assert.assertEquals("400", secondTotalPrice);
+
+    }
+
+    public void verifyBrandsOnProductPage() {
+        List <WebElement> brands = Driver.get().findElements(By.xpath("(//div[@class='brands-name']//li)"));
+        Assert.assertTrue(brands.size()==8);
+    }
+
+    public void clickRandomBrandOnProductPage() {
+        List<WebElement> brands = Driver.get().findElements(By.xpath("//div[@class='brands-name']//li"));
+        int sizeOfBrands = brands.size();
+
+        int i  = rd.nextInt(sizeOfBrands);
+
+        brands.get(i).click();
+
+        lastClickedBrandIndex = i;
+    }
+
+    public void verifyNavigatedToBrandPage() {
+        Assert.assertTrue(productText.isDisplayed());
+    }
+
+    public void clickDifferentRandomBrandOnProductPage() {
+        List<WebElement> brands = Driver.get().findElements(By.xpath("//div[@class='brands-name']//li"));
+        int sizeOfBrands = brands.size();
+
+        int i = rd.nextInt(sizeOfBrands);
+
+        while (i == lastClickedBrandIndex) {
+            i = rd.nextInt(sizeOfBrands);
+        }
+
+        lastClickedBrandIndex = i;
+        brands.get(i).click();
     }
 
 }

@@ -168,7 +168,7 @@ public class HomePageStepDefinitions extends HomePageSteps {
     }
 
     @When("Click on Products button")
-    public void click_on_products_button() {
+    public void click_on_products_button() throws InterruptedException {
         clickOnProductsButton();
     }
 

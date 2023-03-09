@@ -125,5 +125,9 @@ public class HomePage {
 
     @FindBy(xpath = "//i[@class='material-icons card_travel']/..")
     public WebElement productsButton;
+
+    @FindBy(id = "dismiss-button")
+    public WebElement dismissButtonOnPopop;
+
 }
 
