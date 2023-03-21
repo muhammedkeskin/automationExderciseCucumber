@@ -96,7 +96,7 @@ public class HomePage {
     @FindBy(xpath = "//*[text()=' Delete Account']")
     public WebElement deleteButton;
 
-    @FindBy(css = "[aria-label='Close ad']")
+    @FindBy(css = "//*[text()='Close']")
     public WebElement dismissPopupButton;
 
     @FindBy(xpath = "//div[@class='login-form']/h2")

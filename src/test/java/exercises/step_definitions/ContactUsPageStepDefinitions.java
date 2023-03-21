@@ -3,7 +3,6 @@ package exercises.step_definitions;
 import exercises.steps.ContactusPageSteps;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.Assert;
 
 public class ContactUsPageStepDefinitions extends ContactusPageSteps {
 

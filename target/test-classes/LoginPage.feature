@@ -30,7 +30,7 @@ Feature: LoginPage
     Then Verify Login to your account is visible
     When Enter correct email address and password
       | email    | johndoe1000@gmail.com |
-      | password | asdasd                |
+      | password | 123456                |
     When Click login button
     Then Verify that Logged in as username is visible
     When Click Delete Account button
@@ -58,7 +58,7 @@ Feature: LoginPage
     Then Verify Login to your account is visible
     When Enter correct email address and password
       | email    | johndoe1000@gmail.com |
-      | password | asdasd                |
+      | password | 123456                |
     When Click login button
     Then Verify that Logged in as username is visible
     When Click Logout button

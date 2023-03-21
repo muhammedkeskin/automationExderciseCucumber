@@ -17,8 +17,8 @@ public class ProductsPageSteps extends ProductsPage {
     List<WebElement> productsList;
     int count=0;
 
-    public int lastClickedBrandIndex = -1;
-    public Random rd = new Random();
+    private int lastClickedBrandIndex = -1;
+    private Random rd = new Random();
 
 
     public void verifyThatNavigatedToProductsPage() {
@@ -217,31 +217,19 @@ public class ProductsPageSteps extends ProductsPage {
 
     public void clickRandomBrandOnProductPage() {
         List<WebElement> brands = Driver.get().findElements(By.xpath("//div[@class='brands-name']//li"));
-        int sizeOfBrands = brands.size();
+        int i = brands.size();
 
-        int i  = rd.nextInt(sizeOfBrands);
+        int newBrandIndex  = rd.nextInt(i);
+        while (newBrandIndex == lastClickedBrandIndex) {
+            newBrandIndex = rd.nextInt(i);
+        }
 
-        brands.get(i).click();
-
-        lastClickedBrandIndex = i;
+        lastClickedBrandIndex = newBrandIndex;
+        brands.get(newBrandIndex).click();
     }
 
     public void verifyNavigatedToBrandPage() {
         Assert.assertTrue(productText.isDisplayed());
-    }
-
-    public void clickDifferentRandomBrandOnProductPage() {
-        List<WebElement> brands = Driver.get().findElements(By.xpath("//div[@class='brands-name']//li"));
-        int sizeOfBrands = brands.size();
-
-        int i = rd.nextInt(sizeOfBrands);
-
-        while (i == lastClickedBrandIndex) {
-            i = rd.nextInt(sizeOfBrands);
-        }
-
-        lastClickedBrandIndex = i;
-        brands.get(i).click();
     }
 
 }

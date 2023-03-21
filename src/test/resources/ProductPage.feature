@@ -31,7 +31,7 @@ Feature: LoginPage
     Then Verify SEARCHED PRODUCTS is visible
     Then Verify all the products related to searched word "Blue Top" are visible
 
-    #point of scenario: js ile scroll yapma
+    #point of scenario: scrolling with Js
   Scenario: Verify Subscription in home page
     Given Launch browser
     Given Navigate to Home Page
@@ -54,6 +54,7 @@ Feature: LoginPage
     Then Verify both products are added to Cart
     And Verify their prices, quantity and total price
 
+    #point of scenario: using Random Class while building logic
   Scenario: View & Cart Brand Products
     Given Launch browser
     Given Navigate to Home Page

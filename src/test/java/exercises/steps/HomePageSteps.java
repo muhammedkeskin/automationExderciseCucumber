@@ -12,8 +12,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 
 public class HomePageSteps extends HomePage {
+
+    public static String firstName="";
+    public static String lastName="";
+    public static String company="";
+    public static String address="";
+    public static String country="";
+    public static String state="";
+    public static String city="";
+    public static String zipCode="";
+    public static String mobileNumber="";
+    public static String gender;
 
     public void virfyTheHomePageLoadedSuccessfully() {
         Assert.assertEquals("Automation Exercise",Driver.get().getTitle());
@@ -50,6 +62,7 @@ public class HomePageSteps extends HomePage {
     public HomePageSteps selectGender() {
         if (!genderMaleCheckBox.isSelected()) {
             genderMaleCheckBox.click();
+            gender = genderMaleCheckBox.getAttribute("value");
         }
         return this;
     }
@@ -84,7 +97,6 @@ public class HomePageSteps extends HomePage {
         if (!newsletterSignupBox.isSelected()){
             newsletterSignupBox.click();
         }
-
     }
 
     public void selectReceiveSpecialOffers() {
@@ -93,23 +105,27 @@ public class HomePageSteps extends HomePage {
         }
     }
 
-    public HomePageSteps fillFirst() {
-        firstNameBox.sendKeys(Faker.instance().name().firstName());
+    public HomePageSteps fillFirstName() {
+        firstName=Faker.instance().name().firstName();
+        firstNameBox.sendKeys(firstName);
         return this;
     }
 
     public HomePageSteps fillLastName() {
-        lastNameBox.sendKeys(Faker.instance().name().lastName());
+        lastName=Faker.instance().name().lastName();
+        lastNameBox.sendKeys(lastName);
         return this;
     }
 
     public HomePageSteps fillCompany() {
-        companyBox.sendKeys(Faker.instance().company().name());
+        company=Faker.instance().company().name();
+        companyBox.sendKeys(company);
         return this;
     }
 
     public HomePageSteps fillAddress() {
-        addressBox1.sendKeys(Faker.instance().address().fullAddress());
+        address=Faker.instance().address().fullAddress();
+        addressBox1.sendKeys(address);
         return this;
     }
 
@@ -119,27 +135,32 @@ public class HomePageSteps extends HomePage {
     }
 
     public HomePageSteps fillCountry() {
-        selectByText(countryDropdown,"United States");
+        country="United States";
+        selectByText(countryDropdown,country);
         return this;
     }
 
     public HomePageSteps fillState() {
-        stateBox.sendKeys(Faker.instance().address().state());
+        state=Faker.instance().address().state();
+        stateBox.sendKeys(state);
         return this;
     }
 
     public HomePageSteps fillCity() {
-        cityBox.sendKeys(Faker.instance().address().city());
+        city=Faker.instance().address().city();
+        cityBox.sendKeys(city);
         return this;
     }
 
     public HomePageSteps fillZipCode() {
-        zipcodeBox.sendKeys(Faker.instance().address().zipCode());
+        zipCode=Faker.instance().address().zipCode();
+        zipcodeBox.sendKeys(zipCode);
         return this;
     }
 
     public HomePageSteps fillMobileNumber() {
-        mobileNumberBox.sendKeys(Faker.instance().phoneNumber().phoneNumber());
+        mobileNumber=Faker.instance().phoneNumber().phoneNumber();
+        mobileNumberBox.sendKeys(mobileNumber);
         return this;
     }
 
@@ -152,7 +173,106 @@ public class HomePageSteps extends HomePage {
     }
 
     public void clickContinueButtonOnRegistrationPage() {
+        WebDriverWait wait = new WebDriverWait(Driver.get(),10);
+        wait.until(ExpectedConditions.elementToBeClickable(continueButton));
         continueButton.click();
+    }
+
+    //POPUP HANDLE İLK HALİ:
+    public void verifyThatNavigatedToProductsPage() {
+        try {
+            if (dismissPopupButton.isDisplayed()) {
+                dismissPopupButton.click();
+            }
+        } catch (NoSuchElementException e) {
+        }
+
+        Assert.assertEquals(Driver.get().getTitle(), "Automation Exercise - All Products");
+    }
+/*
+    public void handlePopup() {
+        try {
+            WebElement outherFrame=Driver.get().findElement(By.id("aswift_3"));
+            Driver.get().switchTo().frame(outherFrame);
+
+            WebElement innerFrame=Driver.get().findElement(By.id("ad_iframe"));
+            Driver.get().switchTo().frame(innerFrame);
+            WebElement popup = Driver.get().findElement(By.cssSelector("[aria-label='Close ad']"));
+            if (popup.isDisplayed()) {
+                popup.click();
+            }
+
+            Driver.get().switchTo().defaultContent();
+            Driver.get().switchTo().defaultContent();
+
+        } catch (NoSuchElementException e) {
+        }
+        Assert.assertEquals(Driver.get().getTitle(), "Automation Exercise - All Products");
+    }
+
+*/
+
+    public void handlePopup() {
+
+        try {
+            List<WebElement> iframes=Driver.get().findElements(By.xpath("//ins//iframe[contains(@id,'aswift')]"));
+            int size=iframes.size();
+            WebDriverWait wait = new WebDriverWait(Driver.get(),10);
+            System.out.println("asd1");
+
+            WebElement outerIframe = Driver.get().findElement(By.xpath("(//ins//iframe[contains(@id,'aswift')])["+size+"]"));
+            Driver.get().switchTo().frame(outerIframe);
+            System.out.println("asd2");
+
+            WebElement innerIframe =  Driver.get().findElement(By.id("ad_iframe"));
+            Driver.get().switchTo().frame(innerIframe);
+            System.out.println("asd3");
+
+            WebElement popup = Driver.get().findElement(By.cssSelector("[aria-label='Close ad']"));
+            wait.until(ExpectedConditions.elementToBeClickable(popup));
+            System.out.println("asd4");
+
+            if (popup.isDisplayed()) {
+                System.out.println("asd5");
+                WebElement closeButton = Driver.get().findElement(By.cssSelector("[aria-label='Close ad']"));
+                closeButton.click();
+                System.out.println("asd6");
+            }
+
+            System.out.println("asd7");
+        } catch (NoSuchElementException e) {
+            System.out.println("asd8");
+        }
+        Driver.get().switchTo().defaultContent();
+        Driver.get().switchTo().defaultContent();
+
+
+        try {
+            List<WebElement> iframes=Driver.get().findElements(By.xpath("//ins//iframe[contains(@id,'aswift')]"));
+            int size=iframes.size();
+            WebDriverWait wait = new WebDriverWait(Driver.get(),10);
+            System.out.println("asd9");
+            System.out.println("size: "+size);
+
+            WebElement outerIframe = Driver.get().findElement(By.xpath("(//ins//iframe[contains(@id,'aswift')])["+size+"]"));
+            Driver.get().switchTo().frame(outerIframe);
+            System.out.println("asd10");
+
+            WebElement popup = Driver.get().findElement(By.cssSelector("[aria-label='Close ad']"));
+            wait.until(ExpectedConditions.elementToBeClickable(popup));
+            System.out.println("asd11");
+
+            if (popup.isDisplayed()) {
+                System.out.println("asd12");
+                WebElement closeButton = Driver.get().findElement(By.cssSelector("[aria-label='Close ad']"));
+                closeButton.click();
+                System.out.println("asd13");
+            }
+            Driver.get().switchTo().defaultContent();
+        } catch (NoSuchElementException e) {
+            System.out.println("asd14");
+        }
+        Driver.get().switchTo().defaultContent();
     }
 
     public void dismissPopupAfterClickingContinueButton() {
@@ -163,12 +283,6 @@ public class HomePageSteps extends HomePage {
     }
 
     public void verifyingThatLoggedInAsUsernameIsVisible() {
-        try {
-            if (dismissPopupButton.isDisplayed()) {
-                dismissPopupAfterClickingContinueButton();
-            }
-        } catch (NoSuchElementException e) {
-        }
         WebDriverWait wait = new WebDriverWait(Driver.get(),10);
         wait.until(ExpectedConditions.elementToBeClickable(loggedInNameText));
         Assert.assertEquals(loggedInNameText.getText(),"name1");

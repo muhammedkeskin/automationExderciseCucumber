@@ -4,7 +4,6 @@ import exercises.steps.HomePageSteps;
 import exercises.utils.ConfigurationReader;
 import exercises.utils.Driver;
 import io.cucumber.java.en.*;
-import org.openqa.selenium.JavascriptExecutor;
 
 import java.util.Map;
 
@@ -72,7 +71,7 @@ public class HomePageStepDefinitions extends HomePageSteps {
 
     @When("Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number")
     public void fill_details_first_name_last_name_company_address_address2_country_state_city_zipcode_mobile_number() {
-        fillFirst()
+        fillFirstName()
                 .fillLastName()
                 .fillCompany()
                 .fillAddress()
@@ -101,6 +100,7 @@ public class HomePageStepDefinitions extends HomePageSteps {
 
     @When("Verify that Logged in as username is visible")
     public void verify_that_logged_in_as_username_is_visible() {
+        handlePopup();
         verifyingThatLoggedInAsUsernameIsVisible();
     }
 
