@@ -1,10 +1,14 @@
 package exercises.steps;
 
 import exercises.pages.CartPage;
-import exercises.pages.HomePage;
+import exercises.utils.ConfigurationReader;
 import exercises.utils.Driver;
 import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.io.File;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 
 public class CartPageSteps extends CartPage {
@@ -14,6 +18,10 @@ public class CartPageSteps extends CartPage {
 
     public void addRandomProductToCartOnHomePage() {
         addFirstProductToCart.click();
+
+        WebDriverWait wait = new WebDriverWait(Driver.get(),10);
+        wait.until(ExpectedConditions.elementToBeClickable(continueShoppingButton));
+        continueShoppingButton.click();
     }
 
     public static void jsScroll() {
@@ -75,6 +83,74 @@ public class CartPageSteps extends CartPage {
         String actualMobileNumber=mobilePhoneNumber.getText();
         Assert.assertEquals(expectedMobileNumber,actualMobileNumber);
         return this;
-
     }
+
+    public void clickRegisterLoginButtonOnCartPage() {
+        registerLoginButtonOnCartPage.click();
+    }
+
+    public CartPageSteps addACommentOnCartPage() {
+        commentArea.sendKeys(ConfigurationReader.get("comment"));
+        return this;
+    }
+
+    public CartPageSteps clickPlaceOrderButtonOnCartpage() {
+        placeOrderButton.click();
+        return this;
+    }
+
+    public CartPageSteps enterNameOnCard() {
+        nameOnCartArea.sendKeys(ConfigurationReader.get("nameOnCart"));
+        return this;
+    }
+
+    public CartPageSteps enterCartNumber() {
+        cardNumberArea.sendKeys(ConfigurationReader.get("cartNumber"));
+        return this;
+    }
+
+    public CartPageSteps enterCVCNumber() {
+        CVCNumberArea.sendKeys(ConfigurationReader.get("CVCNumber"));
+        return this;
+    }
+
+    public CartPageSteps EnterExpirationMonth() {
+        expirationMonthArea.sendKeys(ConfigurationReader.get("expirationMonth"));
+        return this;
+    }
+
+    public CartPageSteps EnterExpirationYear() {
+        expirationYearArea.sendKeys(ConfigurationReader.get("expirationYear"));
+        return this;
+    }
+
+    public void clickPayANdConfirmButtonOnCartPage() {
+        payAndConfirmButton.click();
+    }
+
+    public CartPageSteps clickDownloadInvoiceButtonOnCartPage() {
+        downloadInvoiceButton.click();
+        return this;
+    }
+
+    public CartPageSteps verifyInvoiceDownloadedSuccessfully() throws InterruptedException {
+
+        // Chrome'un varsayılan indirme dizinini seçilir:
+        ChromeOptions options = new ChromeOptions();
+        String downloadPath = "C:\\Users\\MuhammedKeskin\\Downloads";
+        options.addArguments("download.default_directory", downloadPath);
+
+        clickDownloadInvoiceButtonOnCartPage();
+
+        // İndirme işleminin tamamlanması beklenir:
+        Thread.sleep(10000);
+
+        // İndirilen dosyanın var olup olmadığı kontrolü:
+        File downloadedFile = new File(downloadPath + "/invoice.txt");
+
+        Assert.assertTrue(downloadedFile.exists());
+
+        return this;
+    }
+
 }

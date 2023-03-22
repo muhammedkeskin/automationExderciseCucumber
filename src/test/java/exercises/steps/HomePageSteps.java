@@ -218,30 +218,22 @@ public class HomePageSteps extends HomePage {
             List<WebElement> iframes=Driver.get().findElements(By.xpath("//ins//iframe[contains(@id,'aswift')]"));
             int size=iframes.size();
             WebDriverWait wait = new WebDriverWait(Driver.get(),10);
-            System.out.println("asd1");
 
             WebElement outerIframe = Driver.get().findElement(By.xpath("(//ins//iframe[contains(@id,'aswift')])["+size+"]"));
             Driver.get().switchTo().frame(outerIframe);
-            System.out.println("asd2");
 
             WebElement innerIframe =  Driver.get().findElement(By.id("ad_iframe"));
             Driver.get().switchTo().frame(innerIframe);
-            System.out.println("asd3");
 
             WebElement popup = Driver.get().findElement(By.cssSelector("[aria-label='Close ad']"));
             wait.until(ExpectedConditions.elementToBeClickable(popup));
-            System.out.println("asd4");
 
             if (popup.isDisplayed()) {
-                System.out.println("asd5");
                 WebElement closeButton = Driver.get().findElement(By.cssSelector("[aria-label='Close ad']"));
                 closeButton.click();
-                System.out.println("asd6");
             }
 
-            System.out.println("asd7");
         } catch (NoSuchElementException e) {
-            System.out.println("asd8");
         }
         Driver.get().switchTo().defaultContent();
         Driver.get().switchTo().defaultContent();
@@ -251,26 +243,19 @@ public class HomePageSteps extends HomePage {
             List<WebElement> iframes=Driver.get().findElements(By.xpath("//ins//iframe[contains(@id,'aswift')]"));
             int size=iframes.size();
             WebDriverWait wait = new WebDriverWait(Driver.get(),10);
-            System.out.println("asd9");
-            System.out.println("size: "+size);
 
             WebElement outerIframe = Driver.get().findElement(By.xpath("(//ins//iframe[contains(@id,'aswift')])["+size+"]"));
             Driver.get().switchTo().frame(outerIframe);
-            System.out.println("asd10");
 
             WebElement popup = Driver.get().findElement(By.cssSelector("[aria-label='Close ad']"));
             wait.until(ExpectedConditions.elementToBeClickable(popup));
-            System.out.println("asd11");
 
             if (popup.isDisplayed()) {
-                System.out.println("asd12");
                 WebElement closeButton = Driver.get().findElement(By.cssSelector("[aria-label='Close ad']"));
                 closeButton.click();
-                System.out.println("asd13");
             }
             Driver.get().switchTo().defaultContent();
         } catch (NoSuchElementException e) {
-            System.out.println("asd14");
         }
         Driver.get().switchTo().defaultContent();
     }

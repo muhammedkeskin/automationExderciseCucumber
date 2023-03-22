@@ -16,7 +16,10 @@ public class CartPage {
     @FindBy(xpath = "//a[@class='btn btn-default add-to-cart']")
     public WebElement addFirstProductToCart;
 
-    @FindBy(linkText = "View Cart")
+    @FindBy(xpath = "//button[text()='Continue Shopping']")
+    public WebElement continueShoppingButton;
+
+    @FindBy(xpath = "//a[@href='/view_cart']")
     public WebElement viewCartButtonProduct;
 
     @FindBy(xpath = "//*[@class='cart_description']")
@@ -42,4 +45,42 @@ public class CartPage {
 
     @FindBy (css = ".address_phone")
     public WebElement mobilePhoneNumber;
+
+    @FindBy (xpath = "//p/a[@href = '/login']")
+    public WebElement registerLoginButtonOnCartPage;
+
+    @FindBy (css = ".form-control")
+    public WebElement commentArea;
+
+    @FindBy (xpath = "//a[text()='Place Order']")
+    public WebElement placeOrderButton;
+
+    @FindBy (xpath = "//input[@name='name_on_card']")
+    public WebElement nameOnCartArea;
+
+    @FindBy (xpath = "//input[@name='card_number']")
+    public WebElement cardNumberArea;
+
+    @FindBy (xpath = "//input[@name='cvc']")
+    public WebElement CVCNumberArea;
+
+    @FindBy (xpath = "//input[@name='expiry_month']")
+    public WebElement expirationMonthArea;
+
+    @FindBy (xpath = "//input[@name='expiry_year']")
+    public WebElement expirationYearArea;
+
+    @FindBy (xpath = "//button[text()='Pay and Confirm Order']")
+    public WebElement payAndConfirmButton;
+
+    @FindBy (css = ".btn.btn-default.check_out")
+    public WebElement downloadInvoiceButton;
+
+
+
+
+
+
 }
+
+
