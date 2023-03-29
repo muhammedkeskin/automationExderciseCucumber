@@ -172,4 +172,20 @@ public class HomePageStepDefinitions extends HomePageSteps {
         clickOnProductsButton();
     }
 
+    @When("Click on arrow at bottom right side to move upward")
+    public void click_on_arrow_at_bottom_right_side_to_move_upward() {
+        clickOnMovingArrow();
+    }
+
+    @Then("Verify that page is scrolled up and Full-Fledged practice website for Automation Engineers text is visible on screen")
+    public void verify_that_page_is_scrolled_up_and_full_fledged_practice_website_for_automation_engineers_text_is_visible_on_screen() {
+        verifyThatGivenTextIsVisible();
+    }
+
+    @When("Scroll up page to top")
+    public void scroll_up_page_to_top() {
+        scrollUpToPage();
+        //scrollUpByKeyboard();
+    }
+
 }

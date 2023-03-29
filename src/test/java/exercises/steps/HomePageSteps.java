@@ -2,12 +2,11 @@ package exercises.steps;
 
 import com.github.javafaker.Faker;
 import exercises.pages.HomePage;
+import exercises.pages.ProductsPage;
 import exercises.utils.ConfigurationReader;
 import exercises.utils.Driver;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -347,4 +346,42 @@ public class HomePageSteps extends HomePage {
 
         }
     }
+
+    public void clickOnMovingArrow() {
+        movingArrow.click();
+    }
+
+    public void verifyThatGivenTextIsVisible() {
+        //1.Yöntem:
+        WebElement firstStr=Driver.get().findElement(By.xpath("(//h2[text()='Full-Fledged practice website for Automation Engineers'])[1]"));
+        WebElement secondStr=Driver.get().findElement(By.xpath("(//h2[text()='Full-Fledged practice website for Automation Engineers'])[2]"));
+        WebElement thirdStr=Driver.get().findElement(By.xpath("(//h2[text()='Full-Fledged practice website for Automation Engineers'])[3]"));
+
+        Assert.assertTrue(firstStr.isDisplayed()
+                ||secondStr.isDisplayed()
+                ||thirdStr.isDisplayed());
+
+        /*
+        //2. Yöntem:
+        WebElement firstString=Driver.get().findElement(By.xpath("(//h2[text()='Full-Fledged practice website for Automation Engineers']/../..)[1]"));
+        WebElement secondString=Driver.get().findElement(By.xpath("(//h2[text()='Full-Fledged practice website for Automation Engineers']/../..)[2]"));
+        WebElement thirdString=Driver.get().findElement(By.xpath("(//h2[text()='Full-Fledged practice website for Automation Engineers']/../..)[3]"));
+
+        Assert.assertTrue(firstString.getAttribute("class").equals("item active")
+                ||secondString.getAttribute("class").equals("item active")
+                ||thirdString.getAttribute("class").equals("item active"));
+
+        */
+    }
+
+    public void scrollUpToPage() {
+        JavascriptExecutor js = (JavascriptExecutor) Driver.get();
+        js.executeScript("window.scrollTo(0, 0)");
+    }
+
+    public void scrollUpByKeyboard() {
+        ProductsPage productsPage = new ProductsPage();
+        productsPage.subciptionText.sendKeys(Keys.HOME);
+    }
+
 }

@@ -129,5 +129,8 @@ public class HomePage {
     @FindBy(id = "dismiss-button")
     public WebElement dismissButtonOnPopop;
 
+    @FindBy(css = ".fa.fa-angle-up")
+    public WebElement movingArrow;
+
 }
 

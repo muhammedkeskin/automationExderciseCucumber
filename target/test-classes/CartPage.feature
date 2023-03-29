@@ -29,7 +29,7 @@ Feature: Cart Page
     Then Verify that ACCOUNT DELETED! is visible and click Continue button
 
 
-#yeni stepler: 41,56,57,58,59,60,61
+    #yeni stepler: 41,56,57,58,59,60,61
     #Point of scenario: verify the downloaded file
   Scenario: Download Invoice after purchase order
     Given Launch browser
